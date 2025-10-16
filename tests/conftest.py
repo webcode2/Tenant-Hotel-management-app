@@ -44,7 +44,7 @@ async def db_session() -> AsyncGenerator[AsyncSession, None]:
     async with TestSessionLocal() as session:
         # --- SEED DEFAULT ROLES ---
         from sqlalchemy import select
-        from app.models.role import Role
+        from app.account_module.models.role import Role
 
         existing_roles = (await session.execute(select(Role))).scalars().all()
         if not existing_roles:

@@ -7,8 +7,8 @@ from sqlalchemy import select
 
 from app.core.database import get_db
 from app.core.security import decode_access_token
-from app.models.user import User
-from app.models.user_role_assignment import UserRoleAssignment
+from app.account_module.models.user import User
+from app.account_module.models.user_role_assignment import UserRoleAssignment
 
 security = HTTPBearer()
 

@@ -3,9 +3,9 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.role import Role
-from app.models.user_role_assignment import UserRoleAssignment
-from app.services.role_service import RoleService
+from app.account_module.models.role import Role
+from app.account_module.models.user_role_assignment import UserRoleAssignment
+from app.account_module.services.role_service import RoleService
 
 
 async def create_admin_user_with_token(client: AsyncClient, db_session: AsyncSession) -> str:

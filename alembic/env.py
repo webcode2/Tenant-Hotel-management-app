@@ -10,10 +10,10 @@ from alembic import context
 
 # Import all models for migration detection
 from app.core.database import Base
-from app.models.user import User
-from app.models.role import Role
-from app.models.hotel import Hotel
-from app.models.user_role_assignment import UserRoleAssignment
+from app.account_module.models.user import User
+from app.account_module.models.role import Role
+from app.hotel_module.models.hotel import Hotel
+from app.account_module.models.user_role_assignment import UserRoleAssignment
 
 # Import settings
 from app.core.config import settings

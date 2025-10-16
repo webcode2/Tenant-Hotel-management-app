@@ -3,12 +3,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.routers import auth, users, roles, hotels
+from app.core.seed import lifespan
+from app.account_module.router import auth, users, roles
+from app.hotel_module.routers import hotels
 
 app = FastAPI(
     title=settings.APP_NAME,
     description="Multi-tenant Hotel Management System with Role-Based Access Control",
     version="1.0.0",
+    lifespan=lifespan
 )
 
 # Configure CORS
