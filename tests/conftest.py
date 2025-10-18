@@ -62,7 +62,12 @@ async def db_session() -> AsyncGenerator[AsyncSession, None]:
 
     # Uncomment if you want to drop tables after each test
     async with test_engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
+       all_tables = list(Base.metadata.sorted_tables)
+       all_tables.reverse()
+       await conn.run_sync(
+           lambda sync_conn: Base.metadata.drop_all(
+               sync_conn, tables=all_tables)
+       )
 
     # async with test_engine.begin() as conn:
     #     await conn.run_sync(Base.metadata.drop_all)

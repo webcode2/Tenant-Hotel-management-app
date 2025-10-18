@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.seed import lifespan
 from app.account_module.router import auth, users, roles
-from app.hotel_module.routers import hotels
+from app.hotel_module.routers import hotels, bookings, rooms
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -28,6 +28,8 @@ app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(roles.router)
 app.include_router(hotels.router)
+app.include_router(rooms.router)
+app.include_router(bookings.router)
 
 
 @app.get("/", tags=["Root"])

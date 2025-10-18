@@ -22,9 +22,31 @@ class HotelService:
         Returns:
             Hotel: Created hotel
         """
+        # Map fields from the Pydantic model (hotel_data) to the SQLAlchemy ORM model (Hotel)
+
+        # NOTE: For structured fields like 'area', 'other_images', and 'facilities',
+        # the Pydantic object (e.g., hotel_data.area) is often passed directly.
+        # If your SQLAlchemy model's column type is JSONB, SQLAlchemy will automatically
+        # serialize the Pydantic object's dictionary representation.
+
+        # If the columns in the Hotel model are named to match the fields in HotelCreate,
+        # you can also use dict(**hotel_data.model_dump()) to instantiate the Hotel object
+        # for maximum brevity, but explicit mapping is clearer.
+
         hotel = Hotel(
             name=hotel_data.name,
-            address=hotel_data.address
+            description=hotel_data.description,
+
+            # Map the nested Pydantic 'Area' object to the 'area' column (assuming JSONB/JSON type)
+            area=hotel_data.area.model_dump(),
+
+            cover_image_url=hotel_data.cover_image_url,
+
+            # Map the List of Pydantic 'Image' objects (assuming JSONB/JSON type)
+            other_images=[img.model_dump() for img in hotel_data.other_images],
+
+            # Map the List of strings (assuming JSONB/ARRAY type)
+            facilities=hotel_data.facilities
         )
 
         db.add(hotel)

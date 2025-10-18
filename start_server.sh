@@ -36,7 +36,7 @@ import asyncio
 from sqlalchemy import select, and_
 from app.account_module.models import user, role, user_role_assignment  # ensure model registry consistency
 from app.hotel_module.models import  hotel  # ensure model registry consistency
-from app.account_module.models.user import User
+from app.account_module.models.user import User,StaffProfile
 from app.account_module.models.role import Role
 from app.account_module.models.user_role_assignment import UserRoleAssignment
 from app.core.database import AsyncSessionLocal
